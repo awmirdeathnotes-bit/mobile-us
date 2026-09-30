@@ -1,0 +1,1005 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<meta name="theme-color" content="#0e1117">
+<title>Us</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;700&family=Vazirmatn:wght@400;700&display=swap" rel="stylesheet">
+<style>
+:root{--page:#d9dee7;--page2:#c3cad6;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--page:#0b0e14;--page2:#171c27}}
+:root[data-theme="dark"]{--page:#0b0e14;--page2:#171c27}
+*,*::before,*::after{box-sizing:border-box}
+html,body{height:100%;margin:0}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+body{background:var(--page);background-image:radial-gradient(120% 70% at 50% 0%,var(--page2),var(--page));font-family:"Pixelify Sans",Vazirmatn,system-ui,sans-serif;overflow:hidden;-webkit-user-select:none;user-select:none;touch-action:manipulation;overscroll-behavior:none;-webkit-tap-highlight-color:transparent}
+.app{height:100%;display:grid;place-items:center;padding:6px}
+
+/* ---------- phone body ---------- */
+.phone{
+  --W:min(420px, calc(100vw - 12px), calc((100vh - 16px) / 2));
+  --W:min(420px, calc(100vw - 12px), calc((100dvh - 16px - env(safe-area-inset-top,0px) - env(safe-area-inset-bottom,0px)) / 2));
+  width:var(--W);font-size:calc(var(--W) / 100);position:relative;
+  background:linear-gradient(160deg,#323a4c 0%,#1c212c 48%,#11151d 100%);
+  border-radius:17em 17em 24em 24em / 13em 13em 26em 26em;
+  padding:3.5em 6em 7em;
+  box-shadow:0 3em 7em rgba(0,0,0,.5),inset 0 .5em .6em rgba(255,255,255,.09),inset 0 -1.2em 2.4em rgba(0,0,0,.45);
+}
+.top{height:9.5em;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.6em}
+.speaker{width:22em;height:1.4em;border-radius:1em;background:repeating-linear-gradient(90deg,#06080c 0 1.3em,#2b3243 1.3em 2.1em);box-shadow:inset 0 .2em .3em rgba(0,0,0,.8)}
+.brand{font-weight:700;font-size:5.4em;letter-spacing:.06em;color:#cfd6e2;line-height:1;text-shadow:0 .06em 0 rgba(0,0,0,.7)}
+
+.bezel{background:#040507;border-radius:13em 13em 11em 11em;padding:3.4em;margin-top:.8em;box-shadow:inset 0 0 0 .45em #11141b,0 .3em 0 rgba(255,255,255,.05)}
+.lcd{--lcd:#ede04c;--ink:#141408;position:relative;height:74em;background:var(--lcd);color:var(--ink);border-radius:14em / 12em;overflow:hidden;transition:background-color .35s;box-shadow:inset 0 0 3em rgba(0,0,0,.35),inset 0 0 .8em rgba(0,0,0,.5);cursor:default}
+.lcd::before{content:"";position:absolute;inset:0;z-index:3;pointer-events:none;background:radial-gradient(90% 75% at 50% 40%,rgba(255,255,255,.22),transparent 65%),radial-gradient(135% 115% at 50% 50%,transparent 58%,rgba(0,0,0,.3))}
+.lcd::after{content:"";position:absolute;inset:0;z-index:4;pointer-events:none;background:repeating-linear-gradient(to bottom,rgba(0,0,0,.08) 0 .35em,transparent .35em .8em)}
+
+.status{position:absolute;top:4.6em;left:9.5em;right:9.5em;height:5em;display:flex;align-items:center;gap:1.4em}
+.status svg{height:3.4em;width:auto;display:block}
+.status .sp{flex:1}
+.clock{font-weight:700;font-size:3.8em;line-height:1}
+.mode{font-size:2.8em;line-height:1;border:.1em solid currentColor;padding:.05em .2em;font-weight:700}
+.mode:empty{display:none}
+.content{position:absolute;top:2.36em;bottom:2.13em;left:1.67em;right:1.67em;display:flex;flex-direction:column;font-size:4.5em;line-height:1.25;overflow:hidden}
+.softs{position:absolute;bottom:1em;left:2.44em;right:2.44em;height:1.28em;display:flex;justify-content:space-between;align-items:flex-end;font-weight:700;font-size:3.9em}
+.softs span{cursor:pointer;min-height:1em}
+#s0{position:absolute;left:50%;transform:translateX(-50%)}
+
+/* screen content */
+.fa{font-family:Vazirmatn,sans-serif}
+.title{font-weight:700;text-align:center;margin-bottom:.2em;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;border-bottom:.1em solid currentColor;padding-bottom:.08em}
+.list{flex:1;min-height:0;overflow-y:auto;scrollbar-width:none}
+.list::-webkit-scrollbar,.thread::-webkit-scrollbar{display:none}
+.row{padding:.1em .35em;display:flex;justify-content:space-between;align-items:baseline;gap:.5em;white-space:nowrap;cursor:pointer}
+.row span{overflow:hidden;text-overflow:ellipsis}
+.row small{font-size:.75em;opacity:.8;flex-shrink:0}
+.row.sel{background:var(--ink);color:var(--lcd)}
+.lbl{font-size:.72em;margin-top:.35em}
+.field{border-bottom:.12em solid currentColor;min-height:1.45em;padding:0 .15em;white-space:pre;overflow:hidden}
+.field.on{background:rgba(0,0,0,.08)}
+.cur{display:inline-block;width:.42em;height:1em;background:currentColor;vertical-align:-.14em;animation:blink 1s steps(1) infinite}
+@keyframes blink{50%{opacity:0}}
+.hint{font-size:.64em;opacity:.85;margin-top:.45em;text-align:center;line-height:1.3}
+.note{font-size:.58em;opacity:.75;text-align:center;margin-top:auto}
+.center{flex:1;min-height:0;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;gap:.15em}
+.big{font-weight:700;font-size:3.2em;line-height:.95}
+.mid{font-weight:700;font-size:1.9em;line-height:1}
+.dim{opacity:.7;font-size:.8em}
+.mhead{position:relative;text-align:center;font-weight:700}
+.mhead .idx{position:absolute;right:0;top:0;font-size:.75em}
+.micon{flex:1;min-height:0;display:grid;place-items:center;cursor:pointer}
+.micon svg{height:5.4em;width:auto}
+.dots{display:flex;justify-content:center;gap:.28em;padding-bottom:.1em}
+.dots i{width:.34em;height:.34em;border:.08em solid currentColor}
+.dots i.on{background:currentColor}
+.chead{font-weight:700;border-bottom:.1em solid currentColor;display:flex;justify-content:space-between;gap:.4em;white-space:nowrap}
+.chead small{font-size:.7em;opacity:.8;align-self:center}
+.thread{flex:1;min-height:0;overflow-y:auto;scrollbar-width:none;display:flex;flex-direction:column;gap:.25em;padding:.2em 0}
+.m{max-width:86%;align-self:flex-start;border:.1em solid currentColor;padding:.02em .35em .06em;border-radius:.35em .35em .35em 0;font-size:.82em;overflow-wrap:anywhere;white-space:pre-wrap}
+.m.me{align-self:flex-end;background:var(--ink);color:var(--lcd);border-radius:.35em .35em 0 .35em}
+.m small{display:block;font-size:.66em;opacity:.7}
+.m b{display:block;font-size:.7em}
+.empty{margin:auto;text-align:center;opacity:.8;font-size:.8em}
+.txwrap{flex:1;min-height:0;position:relative}
+.txwrap canvas{position:absolute;inset:0;width:100%;height:100%;image-rendering:pixelated}
+.ph{position:absolute;inset:0;display:grid;place-items:center;opacity:.55;text-align:center;font-size:.8em}
+.snbar{display:flex;justify-content:space-between;font-weight:700;font-size:.8em}
+.snw{flex:1;min-height:0;display:grid;place-items:center}
+.sn{max-width:100%;max-height:100%;image-rendering:pixelated;display:block}
+.verse{font-family:Vazirmatn,sans-serif;direction:rtl;text-align:center;font-size:.92em;line-height:1.75;font-weight:700}
+.gist{font-size:.66em;text-align:center;margin-top:.35em;opacity:.9;line-height:1.3}
+.scroll{flex:1;min-height:0;overflow-y:auto;scrollbar-width:none}
+.card{border:.12em solid currentColor;padding:.4em .5em;text-align:center;font-size:.85em;line-height:1.35;margin:auto 0}
+.card b{display:block;margin-bottom:.2em}
+.eq{display:flex;gap:.15em;align-items:flex-end;height:1.4em;justify-content:center}
+.eq i{width:.35em;background:currentColor;animation:eq .5s steps(3) infinite alternate}
+.eq i:nth-child(2){animation-delay:.15s}.eq i:nth-child(3){animation-delay:.3s}.eq i:nth-child(4){animation-delay:.05s}
+@keyframes eq{from{height:.2em}to{height:1.3em}}
+
+/* ---------- controls ---------- */
+button{font:inherit;color:inherit}
+.key{border:0;cursor:pointer;touch-action:manipulation;-webkit-tap-highlight-color:transparent;user-select:none;-webkit-user-select:none;
+  background:linear-gradient(#3d4557,#262c38);color:#e6ebf3;
+  box-shadow:0 .9em 0 #0e1117,0 1.4em 1.6em rgba(0,0,0,.45),inset 0 .3em .25em rgba(255,255,255,.13);
+  transition:transform .06s ease-out,box-shadow .06s ease-out,filter .06s}
+.key.down{transform:translateY(.8em);filter:brightness(.88);box-shadow:0 .1em 0 #0e1117,0 .3em .5em rgba(0,0,0,.4),inset 0 .3em .4em rgba(0,0,0,.35)}
+.key:focus-visible,.ok:focus-visible,.dp:focus-visible{outline:.5em solid #8fd8f5;outline-offset:.4em}
+
+.nav{margin-top:4.2em;display:grid;grid-template-columns:1fr 34em 1fr;grid-template-rows:15.5em 15.5em;column-gap:3em;row-gap:3em}
+.soft{height:7.5em;align-self:center;border-radius:5em 5em 3em 3em;display:grid;place-items:center}
+.soft i{display:block;width:45%;height:.7em;border-radius:1em;background:#b8c1cf;opacity:.85}
+.call,.end{height:8.5em;align-self:center;border-radius:3em 3em 5em 5em;display:grid;place-items:center}
+.call{background:linear-gradient(#3fa564,#23703e)}
+.end{background:linear-gradient(#d24a42,#8e2420)}
+.call svg,.end svg{height:4.4em;width:auto;fill:#f3f6fa}
+.s1{grid-column:1;grid-row:1}.s2{grid-column:3;grid-row:1}.call{grid-column:1;grid-row:2}.end{grid-column:3;grid-row:2}
+.dpad{grid-column:2;grid-row:1 / span 2;position:relative;border-radius:50%;
+  background:radial-gradient(circle at 50% 32%,#4d566a,#262c38 72%);
+  box-shadow:0 1em 0 #0e1117,0 1.6em 2em rgba(0,0,0,.5),inset 0 .4em .3em rgba(255,255,255,.13);transition:transform .07s}
+.dpad.t-up{transform:perspective(60em) rotateX(9deg)}
+.dpad.t-down{transform:perspective(60em) rotateX(-9deg)}
+.dpad.t-left{transform:perspective(60em) rotateY(-9deg)}
+.dpad.t-right{transform:perspective(60em) rotateY(9deg)}
+.dp{position:absolute;background:transparent;border:0;padding:0;display:grid;place-items:center;cursor:pointer;touch-action:manipulation}
+.dp.up{top:0;left:25%;width:50%;height:32%}.dp.down{bottom:0;left:25%;width:50%;height:32%}
+.dp.left{left:0;top:25%;width:32%;height:50%}.dp.right{right:0;top:25%;width:32%;height:50%}
+.dp i{width:0;height:0;border:1.5em solid transparent}
+.dp.up i{border-bottom-color:#aeb8c8;border-top-width:0}.dp.down i{border-top-color:#aeb8c8;border-bottom-width:0}
+.dp.left i{border-right-color:#aeb8c8;border-left-width:0}.dp.right i{border-left-color:#aeb8c8;border-right-width:0}
+.ok{position:absolute;left:50%;top:50%;width:14em;height:14em;margin:-7em 0 0 -7em;border-radius:50%;border:0;cursor:pointer;
+  background:radial-gradient(circle at 50% 32%,#5d667b,#333a4a);color:#e6ebf3;
+  box-shadow:0 .6em 0 #0e1117,inset 0 .3em .25em rgba(255,255,255,.16);transition:transform .06s,box-shadow .06s;touch-action:manipulation}
+.ok span{font-size:3.4em;font-weight:700}
+.ok.down{transform:translateY(.5em);box-shadow:0 .1em 0 #0e1117,inset 0 .3em .4em rgba(0,0,0,.3)}
+
+.pad{margin-top:4.4em;display:grid;grid-template-columns:repeat(3,1fr);gap:2.6em 3.2em}
+.pad .key{height:10.5em;display:flex;align-items:center;justify-content:center;gap:1.3em;border-radius:5em 5em 6.5em 6.5em / 4em 4em 7em 7em}
+.pad .key b{font-size:5.2em;line-height:1}
+.pad .key small{font-size:2.5em;opacity:.72;min-width:2.8em;text-align:left;letter-spacing:.04em}
+
+#kb{position:fixed;left:0;bottom:0;width:1px;height:1px;opacity:0;font-size:16px;border:0;padding:0;pointer-events:none}
+
+.modal{position:fixed;inset:0;z-index:50;background:rgba(4,6,10,.86);display:grid;place-items:center;padding:16px;padding-top:calc(16px + env(safe-area-inset-top,0px));padding-bottom:calc(16px + env(safe-area-inset-bottom,0px))}
+.modal[hidden]{display:none}
+.mcard{width:100%;max-width:420px;text-align:center;color:#e8ecf3}
+.mcard img{max-width:100%;max-height:64vh;border-radius:14px;display:block;margin:0 auto 12px;-webkit-user-select:auto;user-select:auto;-webkit-touch-callout:default}
+.mcard p{margin:0 0 12px;font-size:15px;opacity:.85}
+.mbtns{display:flex;gap:10px;justify-content:center;flex-wrap:wrap}
+.mbtns button{font:700 16px "Pixelify Sans",sans-serif;border:0;border-radius:999px;padding:11px 20px;background:#e8ecf3;color:#141821;cursor:pointer}
+.mbtns .alt{background:transparent;color:#e8ecf3;border:1px solid #5a6378}
+@media (prefers-reduced-motion:reduce){.cur,.eq i{animation:none}.key,.ok,.dpad{transition:none}}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="phone" id="phone">
+    <div class="top"><div class="speaker"></div><div class="brand">Us</div></div>
+    <div class="bezel">
+      <div class="lcd" id="lcd">
+        <div class="status">
+          <span id="sig"></span><span id="env"></span><span class="mode" id="mode"></span>
+          <span class="sp"></span><span class="clock" id="clk">00:00</span><span id="bat"></span>
+        </div>
+        <div class="content" id="content"></div>
+        <div class="softs"><span id="s1" data-k="soft1"></span><span id="s0" data-k="ok"></span><span id="s2" data-k="soft2"></span></div>
+      </div>
+    </div>
+
+    <div class="nav">
+      <button class="key soft s1" data-k="soft1" aria-label="Left soft key"><i></i></button>
+      <div class="dpad" id="dpad">
+        <button class="dp up" data-k="up" aria-label="Up"><i></i></button>
+        <button class="dp down" data-k="down" aria-label="Down"><i></i></button>
+        <button class="dp left" data-k="left" aria-label="Left"><i></i></button>
+        <button class="dp right" data-k="right" aria-label="Right"><i></i></button>
+        <button class="ok" data-k="ok" aria-label="OK"><span>OK</span></button>
+      </div>
+      <button class="key soft s2" data-k="soft2" aria-label="Right soft key"><i></i></button>
+      <button class="key call" data-k="call" aria-label="Call / send"><svg viewBox="0 0 24 24"><path d="M6.6 10.8a15.1 15.1 0 0 0 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1A17 17 0 0 1 3 4c0-.6.4-1 1-1h3.5c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.3 0 .7-.2 1z"/></svg></button>
+      <button class="key end" data-k="end" aria-label="End / back"><svg viewBox="0 0 24 24"><path d="M12 9c-1.6 0-3.1.3-4.6.7v3.1c0 .4-.2.7-.6.9-1 .5-1.9 1.1-2.6 1.8-.2.2-.4.3-.7.3s-.5-.1-.7-.3L.3 13c-.2-.2-.3-.4-.3-.7s.1-.5.3-.7A16.4 16.4 0 0 1 12 7c4.6 0 8.7 1.8 11.7 4.6.2.2.3.4.3.7s-.1.5-.3.7l-2.5 2.5c-.2.2-.4.3-.7.3s-.5-.1-.7-.3c-.8-.7-1.7-1.3-2.6-1.8-.4-.2-.6-.5-.6-.9V9.7C15.1 9.3 13.6 9 12 9z"/></svg></button>
+    </div>
+
+    <div class="pad" id="pad"></div>
+  </div>
+</div>
+
+<input id="kb" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send" aria-label="Keyboard input">
+
+<div class="modal" id="modal" hidden>
+  <div class="mcard">
+    <img id="mimg" alt="Your text art">
+    <p id="mtext">Long-press the image to save or share it.</p>
+    <div class="mbtns"><button id="mdl" hidden>Save image</button><button id="mclose" class="alt">Close</button></div>
+  </div>
+</div>
+
+<script>
+/* ================= basics ================= */
+const $ = s => document.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const LS = {
+  get(k, d){ try{ const v = localStorage.getItem(k); return v == null ? d : JSON.parse(v); }catch{ return d; } },
+  set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch{} },
+  del(k){ try{ localStorage.removeItem(k); }catch{} }
+};
+const pad2 = n => String(n).padStart(2,'0');
+const hhmm = ts => { const d = new Date(ts); return pad2(d.getHours()) + ':' + pad2(d.getMinutes()); };
+const chars = s => Array.from(s || '');
+const OWNER_HASH = '6684910b341dc55ffb3b85a8c00d1a16dede603c49b3f0d1d769715cb2511dc4'; // local-only bootstrap
+async function hashPw(u, p){
+  const b = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(`Us|${u}|${p}`));
+  return [...new Uint8Array(b)].map(x => x.toString(16).padStart(2,'0')).join('');
+}
+const validName = u => /^[a-z0-9_.-]{3,20}$/.test(u) && !u.includes('__');
+const cid = (a, b) => [a, b].sort().join('__');
+
+try{ const tg = window.Telegram && window.Telegram.WebApp; if(tg){ tg.ready(); tg.expand(); } }catch{}
+
+/* ================= pixel icons ================= */
+function ico(rows){
+  const h = rows.length, w = Math.max(...rows.map(r => r.length)); let r = '';
+  rows.forEach((row, y) => { for(let x = 0; x < row.length; x++) if(row[x] === '#') r += `<rect x="${x}" y="${y}" width="1.03" height="1.03"/>`; });
+  return `<svg viewBox="0 0 ${w} ${h}" fill="currentColor" shape-rendering="crispEdges" aria-hidden="true">${r}</svg>`;
+}
+const BM = {
+  sig:["#.#......#","###....#.#",".#...#.#.#",".#.#.#.#.#",".#.#.#.#.#"],
+  env:["#########","##.....##","#.#...#.#","#..#.#..#","#...#...#","#########"],
+  bat:[".##########","##.#.#.#.#.#","##.#.#.#.#.#",".##########"],
+  mail:["............","############","##........##","#.#......#.#","#..#....#..#","#...#..#...#","#....##....#","#..........#","#..........#","############","............"],
+  snake:["............","..######....",".#......#...",".#.####.#...",".#.#..#.#.#.",".#.#..#.###.",".#.#...#....",".#..#...###.","..#..####..#","...#.......#","....#######.","............"],
+  text:["............","....##......","...#..#.....","..#....#....","..#....#.#..","..######.#..","..#....#.#..","..#....#.#..",".........#..","........###.","............"],
+  book:["............",".####..####.","#....##....#","#.##.##.##.#","#....##....#","#.##.##.##.#","#....##....#","#.##.##.##.#","#....##....#",".####..####.",".....##.....","............"],
+  q:["............","...######...","..##....##..",".........##.","........##..","......##....",".....##.....",".....##.....","............",".....##.....",".....##.....","............"],
+  note:["............",".....#######",".....#.....#",".....#######",".....#.....#",".....#.....#",".....#.....#","..####..####",".#####.#####","..###...###.","............"],
+  gear:["............",".....##.....","..#.####.#..","..########..","...##..##...",".###....###.",".###....###.","...##..##...","..########..","..#.####.#..",".....##.....","............"],
+  crown:["............","............",".#...#...#..",".##.###.##..",".#########..",".#########..",".#.#.#.#.#..",".#########..",".#########..","............","............"]
+};
+$('#sig').innerHTML = ico(BM.sig); $('#env').innerHTML = ico(BM.env); $('#bat').innerHTML = ico(BM.bat);
+
+/* ================= prefs / themes ================= */
+const THEMES = {
+  yellow:{name:'Yellow', lcd:'#ede04c', ink:'#141408'},
+  red:{name:'Red', lcd:'#f26a55', ink:'#1c0703'},
+  green:{name:'Green', lcd:'#a6d86a', ink:'#0e1a05'},
+  blue:{name:'Light blue', lcd:'#8fd8f5', ink:'#041822'}
+};
+const THEME_KEYS = Object.keys(THEMES);
+const P = Object.assign({theme:'yellow', vibe:true, sound:true}, LS.get('us_prefs', {}));
+const savePrefs = () => LS.set('us_prefs', P);
+function applyTheme(){
+  const t = THEMES[P.theme] || THEMES.yellow, l = $('#lcd');
+  l.style.setProperty('--lcd', t.lcd); l.style.setProperty('--ink', t.ink);
+}
+applyTheme();
+
+/* ================= feedback ================= */
+let AC = null;
+function ac(){ if(!AC){ try{ AC = new (window.AudioContext || window.webkitAudioContext)(); }catch{} } if(AC && AC.state === 'suspended') AC.resume(); return AC; }
+function tone(f, d, t0 = 0, v = .05, type = 'square'){
+  const c = ac(); if(!c) return null;
+  const o = c.createOscillator(), g = c.createGain(), t = c.currentTime + t0;
+  o.type = type; o.frequency.value = f;
+  g.gain.setValueAtTime(v, t); g.gain.setValueAtTime(v, t + d * .8); g.gain.exponentialRampToValueAtTime(.0001, t + d);
+  o.connect(g).connect(c.destination); o.start(t); o.stop(t + d + .02); return o;
+}
+function buzz(p = 12){
+  if(!P.vibe) return;
+  try{
+    const h = window.Telegram && window.Telegram.WebApp && window.Telegram.WebApp.HapticFeedback;
+    if(h){ h.impactOccurred(Array.isArray(p) ? 'heavy' : 'light'); return; }
+    navigator.vibrate && navigator.vibrate(p);
+  }catch{}
+}
+function keyFeedback(){ buzz(10); if(P.sound) tone(1450, .035, 0, .03); }
+
+/* ================= storage (shared db, or this-device fallback) ================= */
+const S = {
+  db:null, L:null, mode:'local',
+  async init(){
+    if(window.claude && typeof window.claude.use === 'function'){
+      try{ this.db = await Promise.race([window.claude.use('db'), new Promise(r => setTimeout(() => r(null), 9000))]); }catch{ this.db = null; }
+    }
+    if(this.db) this.mode = 'shared'; else this.loadLocal();
+  },
+  loadLocal(){
+    this.L = LS.get('us_local', null) || {users:{}, convos:{}, scores:{}};
+    if(!this.L.users.owner69) this.L.users.owner69 = {username:'owner69', role:'owner', hash:OWNER_HASH, createdBy:'system', createdAt:Date.now()};
+    this.saveLocal();
+  },
+  saveLocal(){ LS.set('us_local', this.L); },
+  async getUser(u){ if(this.db){ const s = await this.db.doc('users/' + u).get(); return s.exists ? s.data() : null; } return this.L.users[u] || null; },
+  async setUser(u, d){ if(this.db) return this.db.doc('users/' + u).set(d); this.L.users[u] = d; this.saveLocal(); },
+  async delUser(u){ if(this.db) return this.db.doc('users/' + u).delete(); delete this.L.users[u]; this.saveLocal(); },
+  async listUsers(){ if(this.db){ const s = await this.db.collection('users').get(); return s.docs.map(d => d.data()); } return Object.values(this.L.users); },
+  async getConvo(id){ if(this.db){ const s = await this.db.doc('convos/' + id).get(); return s.exists ? s.data() : null; } return this.L.convos[id] || null; },
+  async setConvo(id, d){ if(this.db) return this.db.doc('convos/' + id).set(d); this.L.convos[id] = d; this.saveLocal(); },
+  async allConvos(){ if(this.db){ const s = await this.db.collection('convos').get(); return s.docs.map(d => ({id:d.id, ...d.data()})); } this.L = LS.get('us_local', this.L); return Object.entries(this.L.convos).map(([id, c]) => ({id, ...c})); },
+  watchConvos(me, cb){
+    if(this.db){
+      return this.db.collection('convos').where('members', 'array-contains', me)
+        .onSnapshot(s => cb(s.docs.map(d => ({id:d.id, ...d.data()}))), () => {});
+    }
+    const pull = () => { this.L = LS.get('us_local', this.L); cb(Object.entries(this.L.convos).filter(([, c]) => (c.members || []).includes(me)).map(([id, c]) => ({id, ...c}))); };
+    pull(); const t = setInterval(pull, 2000); window.addEventListener('storage', pull);
+    return () => { clearInterval(t); window.removeEventListener('storage', pull); };
+  },
+  async setScore(u, score){ const d = {u, score, ts:Date.now()}; if(this.db) return this.db.doc('scores/' + u).set(d); this.L.scores[u] = d; this.saveLocal(); },
+  async getScore(u){ if(this.db){ const s = await this.db.doc('scores/' + u).get(); return s.exists ? s.data().score : 0; } return (this.L.scores[u] || {}).score || 0; },
+  async topScores(){ if(this.db){ const s = await this.db.collection('scores').orderBy('score', 'desc').limit(10).get(); return s.docs.map(d => d.data()); } return Object.values(this.L.scores).sort((a, b) => b.score - a.score).slice(0, 10); }
+};
+
+/* ================= app state ================= */
+const A = { me:null, role:null, screen:null, st:{}, ed:null, mode:'abc', convos:[], unwatch:null, menuIdx:0 };
+const seenKey = () => 'us_seen_' + A.me;
+const getSeen = () => LS.get(seenKey(), {});
+function markSeen(id, ts){ const s = getSeen(); if((s[id] || 0) < ts){ s[id] = ts; LS.set(seenKey(), s); } }
+const isUnread = c => c.lastFrom && c.lastFrom !== A.me && (c.lastTs || 0) > (getSeen()[c.id] || 0);
+const hasUnread = () => A.me && A.convos.some(isUnread);
+
+/* ================= text entry (multi-tap + native keyboard) ================= */
+const MT = {'1':".,?!'@-1",'2':'abc2','3':'def3','4':'ghi4','5':'jkl5','6':'mno6','7':'pqrs7','8':'tuv8','9':'wxyz9','0':' 0','*':'*+-/=()&%#$:;"'};
+const MODES = ['abc','Abc','ABC','123'];
+const mt = {k:null, i:0, t:null, base:''};
+function mtCommit(){ if(mt.t) clearTimeout(mt.t); mt.t = null; mt.k = null; if(A.mode === 'Abc' && mt.base !== null){} }
+function setEd(ed, mode){ mtCommit(); A.ed = ed; if(mode) A.mode = mode; }
+function caseCh(ch){ return (A.mode === 'ABC' || A.mode === 'Abc') ? ch.toUpperCase() : ch; }
+function edInsert(ch){ if(!A.ed) return; A.ed.set(A.ed.get() + ch); }
+function edKey(k){
+  if(!A.ed) return false;
+  if(k === '#'){ mtCommit(); A.mode = MODES[(MODES.indexOf(A.mode) + 1) % MODES.length]; return true; }
+  if(!(k in MT)) return false;
+  if(A.mode === '123' && k !== '*'){ mtCommit(); edInsert(k); return true; }
+  const set = MT[k];
+  if(mt.k === k && mt.t){ clearTimeout(mt.t); mt.i = (mt.i + 1) % set.length; A.ed.set(mt.base + caseCh(set[mt.i])); }
+  else { mtCommit(); mt.k = k; mt.i = 0; mt.base = A.ed.get(); A.ed.set(mt.base + caseCh(set[0])); }
+  mt.t = setTimeout(() => { mt.t = null; mt.k = null; if(A.mode === 'Abc') A.mode = 'abc'; render(); }, 850);
+  return true;
+}
+function edBack(){ if(!A.ed) return false; const v = A.ed.get(); if(!v) return false; mtCommit(); A.ed.set(chars(v).slice(0, -1).join('')); return true; }
+function fieldHtml(val, on, ph, secret){
+  const cs = chars(val);
+  let shown;
+  if(secret) shown = (on && mt.t) ? '•'.repeat(Math.max(0, cs.length - 1)) + esc(cs.slice(-1).join('')) : '•'.repeat(cs.length);
+  else shown = esc(cs.slice(-40).join(''));
+  if(!cs.length && ph && !on) shown = `<span style="opacity:.5">${esc(ph)}</span>`;
+  return `<div class="field ${on ? 'on' : ''}" dir="auto">${shown}${on ? '<i class="cur"></i>' : ''}</div>`;
+}
+const kb = $('#kb');
+function openKb(){ if(!A.ed) return; kb.value = A.ed.get(); kb.focus({preventScroll:true}); }
+kb.addEventListener('input', () => { if(A.ed){ mtCommit(); A.ed.set(kb.value); render(); } });
+kb.addEventListener('keydown', e => { if(e.key === 'Enter'){ e.preventDefault(); press('ok'); } });
+function syncKb(){ if(document.activeElement === kb){ if(!A.ed) kb.blur(); else if(kb.value !== A.ed.get()) kb.value = A.ed.get(); } }
+
+/* ================= navigation ================= */
+const content = $('#content');
+function go(name, params = {}){
+  const cur = screens[A.screen]; if(cur && cur.leave) cur.leave(A.st);
+  A.screen = name; A.st = {...params}; setEd(null);
+  const s = screens[name]; if(s.enter) s.enter(A.st);
+  render();
+}
+function back(){ const b = screens[A.screen].back; go(typeof b === 'function' ? b(A.st) : (b || 'home')); }
+function keepVisible(){
+  const el = content.querySelector('.sel'); if(!el) return;
+  const box = el.closest('.list'); if(!box) return;
+  if(el.offsetTop < box.scrollTop) box.scrollTop = el.offsetTop;
+  else if(el.offsetTop + el.offsetHeight > box.scrollTop + box.clientHeight) box.scrollTop = el.offsetTop + el.offsetHeight - box.clientHeight;
+}
+function render(){
+  const s = screens[A.screen]; if(!s) return;
+  content.innerHTML = s.render(A.st);
+  const [l, c, r] = s.softs ? s.softs(A.st) : ['', '', ''];
+  $('#s1').textContent = l || ''; $('#s0').textContent = c || ''; $('#s2').textContent = r || '';
+  $('#mode').textContent = A.ed ? A.mode : '';
+  $('#env').style.visibility = hasUnread() ? 'visible' : 'hidden';
+  $('#clk').textContent = hhmm(Date.now());
+  keepVisible();
+  if(s.after) s.after(A.st);
+  syncKb();
+}
+function listHtml(items, sel){
+  return `<div class="list">${items.map((it, i) => `<div class="row ${i === sel ? 'sel' : ''}" data-i="${i}"><span dir="auto">${it.t}</span>${it.r != null ? `<small>${it.r}</small>` : ''}</div>`).join('')}</div>`;
+}
+function listNav(st, k, n){
+  if(!n) return false;
+  if(k === 'up'){ st.i = (st.i - 1 + n) % n; return true; }
+  if(k === 'down'){ st.i = (st.i + 1) % n; return true; }
+  return false;
+}
+function later(st, fn){ return (...a) => { if(A.st === st){ fn(...a); render(); } }; }
+
+/* ================= session ================= */
+function startSession(u){
+  A.me = u.username; A.role = u.role;
+  LS.set('us_session', {u:u.username, h:u.hash});
+  if(A.unwatch) A.unwatch();
+  let first = true;
+  A.unwatch = S.watchConvos(A.me, list => {
+    const prev = new Map(A.convos.map(c => [c.id, c.lastTs || 0]));
+    const incoming = list.some(c => c.lastFrom !== A.me && (c.lastTs || 0) > (prev.get(c.id) || 0));
+    A.convos = list;
+    if(incoming && !first){ buzz([90, 60, 90]); if(P.sound){ tone(1320, .09, 0, .05); tone(1760, .12, .12, .05); } }
+    first = false;
+    if(['home', 'msgs', 'chat'].includes(A.screen)) render(); else $('#env').style.visibility = hasUnread() ? 'visible' : 'hidden';
+  });
+}
+function logout(){
+  if(A.unwatch) A.unwatch(); A.unwatch = null;
+  A.me = null; A.role = null; A.convos = []; LS.del('us_session'); go('login');
+}
+
+/* ================= content data ================= */
+const FAAL = [
+  ["یوسف گم گشته بازآید به کنعان غم مخور","کلبهٔ احزان شود روزی گلستان غم مخور","What you lost will return. Sorrow turns to a rose garden — don't grieve."],
+  ["الا یا ایها الساقی ادر کاسا و ناولها","که عشق آسان نمود اول ولی افتاد مشکل‌ها","It began easy, then got hard. Be patient — it's still within reach."],
+  ["صلاح کار کجا و من خراب کجا","ببین تفاوت ره کز کجاست تا به کجا","Head vs heart. Be honest with yourself before you choose."],
+  ["سال‌ها دل طلب جام جم از ما می‌کرد","وان چه خود داشت ز بیگانه تمنا می‌کرد","What you're searching for is already yours. Look closer to home."],
+  ["رونق عهد شباب است دگر بستان را","می‌رسد مژدهٔ گل بلبل خوش الحان را","A fresh season begins. Good news is on its way."],
+  ["بیا تا گل برافشانیم و می در ساغر اندازیم","فلک را سقف بشکافیم و طرحی نو دراندازیم","Be bold. Break the old pattern and start something new."],
+  ["درخت دوستی بنشان که کام دل به بار آرد","نهال دشمنی برکن که رنج بی‌شمار آرد","Drop the grudge. Friendship will bring you what you want."],
+  ["ساقی به نور باده برافروز جام ما","مطرب بگو که کار جهان شد به کام ما","A great omen — things are turning your way. Celebrate."],
+  ["دل می‌رود ز دستم صاحب‌دلان خدا را","دردا که راز پنهان خواهد شد آشکارا","A hidden feeling is about to show. Better you say it first."],
+  ["مژده ای دل که مسیحا نفسی می‌آید","که ز انفاس خوشش بوی کسی می‌آید","Help and healing are coming. Keep your heart open."]
+];
+const TRUTHS = ["What's the most embarrassing song on your playlist?","Who in this group would you call at 3am?","What's a secret talent you have?","What was your worst haircut ever?","What's the last small lie you told?","Which app eats most of your time?","What's your most irrational fear?","Who was your first celebrity crush?","What weird food combo do you secretly love?","What do you pretend to understand but don't?","What's the funniest thing you've cried about?","Which group member would survive a zombie apocalypse?"];
+const DARES = ["Send the group a voice note singing any chorus.","Make a potato your profile picture for one hour.","Speak only in questions for your next 5 messages.","Do 15 squats and report back.","Write a two-line poem about the person above you.","Send a selfie with your best villain face.","Describe your day in 3 emojis — let others guess.","Type your next message with your nose.","Compliment every person who replies next.","Use a pirate accent in your next voice note.","Change your name in the group to 'Captain Us' for a day.","Tell a joke — if nobody laughs, tell another."];
+const NOTE = n => { const m = /^([A-G])(#?)(\d)$/.exec(n); const idx = {C:0,D:2,E:4,F:5,G:7,A:9,B:11}[m[1]] + (m[2] ? 1 : 0); return 440 * Math.pow(2, ((+m[3] + 1) * 12 + idx - 69) / 12); };
+const TONES = [
+  {name:'Gran Vals', bpm:180, n:[['E5',1],['D5',1],['F#4',2],['G#4',2],['C#5',1],['B4',1],['D4',2],['E4',2],['B4',1],['A4',1],['C#4',2],['E4',2],['A4',6]]},
+  {name:'Für Elise', bpm:200, n:[['E5',1],['D#5',1],['E5',1],['D#5',1],['E5',1],['B4',1],['D5',1],['C5',1],['A4',3],['C4',1],['E4',1],['A4',1],['B4',3]]},
+  {name:'Ode to Joy', bpm:220, n:[['E4',2],['E4',2],['F4',2],['G4',2],['G4',2],['F4',2],['E4',2],['D4',2],['C4',2],['C4',2],['D4',2],['E4',2],['E4',3],['D4',1],['D4',4]]},
+  {name:'Us Jingle', bpm:260, n:[['C5',1],['E5',1],['G5',1],['C6',2],['G5',1],['C6',4]]},
+  {name:'Arcade Up', bpm:320, n:[['C5',1],['G4',1],['C5',1],['E5',1],['G5',1],['E5',1],['G5',1],['C6',4]]}
+];
+let playing = [];
+function stopTone(){ playing.forEach(o => { try{ o.stop(); }catch{} }); playing = []; }
+function playTone(t){
+  stopTone(); const beat = 60 / t.bpm / 2; let at = 0;
+  t.n.forEach(([n, d]) => { const o = tone(NOTE(n), beat * d * .92, at, .06); if(o) playing.push(o); at += beat * d; });
+  return at * 1000;
+}
+
+/* ================= text-art rendering ================= */
+const hexRGB = h => [1, 3, 5].map(i => parseInt(h.slice(i, i + 2), 16));
+const RTL = /[\u0590-\u08FF\uFB1D-\uFEFC]/;
+const TX_LW = {1:120, 2:88, 3:64};
+function pixelText(cv, text, inkHex){
+  const ctx = cv.getContext('2d', {willReadFrequently:true}), W = cv.width, H = cv.height;
+  ctx.clearRect(0, 0, W, H);
+  if(!text) return;
+  const rtl = RTL.test(text), fpx = Math.max(6, Math.round(W * .17)), m = Math.round(W * .03);
+  ctx.font = `700 ${fpx}px ${rtl ? 'Vazirmatn' : '"Pixelify Sans"'}, sans-serif`;
+  ctx.direction = rtl ? 'rtl' : 'ltr'; ctx.textAlign = rtl ? 'right' : 'left'; ctx.textBaseline = 'top'; ctx.fillStyle = '#000';
+  const lines = [], maxW = W - 2 * m;
+  text.split('\n').forEach(par => {
+    let line = '';
+    par.split(' ').forEach(w => {
+      const t = line ? line + ' ' + w : w;
+      if(ctx.measureText(t).width <= maxW || !line) line = t; else { lines.push(line); line = w; }
+    });
+    lines.push(line);
+  });
+  const lh = Math.round(fpx * (rtl ? 1.55 : 1.3)); let y = m;
+  lines.forEach(l => { ctx.fillText(l, rtl ? W - m : m, y); y += lh; });
+  const img = ctx.getImageData(0, 0, W, H), d = img.data, [r, g, b] = hexRGB(inkHex);
+  for(let i = 0; i < d.length; i += 4){ const on = d[i + 3] > 105; d[i] = r; d[i + 1] = g; d[i + 2] = b; d[i + 3] = on ? 255 : 0; }
+  ctx.putImageData(img, 0, 0);
+}
+function drawBM(x, rows, px, py, s){ rows.forEach((row, y) => { for(let i = 0; i < row.length; i++) if(row[i] === '#') x.fillRect(px + i * s, py + y * s, s, s); }); }
+function exportTextArt(text, size){
+  const t = THEMES[P.theme], W = 1080, H = 1240, c = document.createElement('canvas'); c.width = W; c.height = H;
+  const x = c.getContext('2d'); x.fillStyle = '#000'; x.fillRect(0, 0, W, H);
+  const sx = 34, sy = 34, sw = W - 68, sh = H - 68, rr = 150;
+  x.save(); x.beginPath();
+  x.moveTo(sx + rr, sy); x.quadraticCurveTo(W / 2, sy - 16, sx + sw - rr, sy); x.quadraticCurveTo(sx + sw, sy, sx + sw, sy + rr);
+  x.quadraticCurveTo(sx + sw + 16, H / 2, sx + sw, sy + sh - rr); x.quadraticCurveTo(sx + sw, sy + sh, sx + sw - rr, sy + sh);
+  x.quadraticCurveTo(W / 2, sy + sh + 16, sx + rr, sy + sh); x.quadraticCurveTo(sx, sy + sh, sx, sy + sh - rr);
+  x.quadraticCurveTo(sx - 16, H / 2, sx, sy + rr); x.quadraticCurveTo(sx, sy, sx + rr, sy); x.closePath(); x.clip();
+  x.fillStyle = t.lcd; x.fillRect(0, 0, W, H);
+  x.fillStyle = t.ink; drawBM(x, BM.sig, 110, 96, 7); if(hasUnread()) drawBM(x, BM.env, 200, 100, 7);
+  x.font = '700 48px "Pixelify Sans", monospace'; x.textAlign = 'right'; x.textBaseline = 'top'; x.fillText(hhmm(Date.now()), 850, 92); drawBM(x, BM.bat, 870, 100, 8);
+  const tw = 880, th = 820, lc = document.createElement('canvas'); lc.width = TX_LW[size]; lc.height = Math.round(lc.width * th / tw);
+  pixelText(lc, text, t.ink); x.imageSmoothingEnabled = false; x.drawImage(lc, 100, 190, tw, th);
+  x.fillStyle = t.ink; x.font = '700 46px "Pixelify Sans", monospace'; x.textBaseline = 'alphabetic';
+  x.textAlign = 'left'; x.fillText('Menu', 110, H - 100); x.textAlign = 'right'; x.fillText('Clear', W - 110, H - 100);
+  x.textAlign = 'center'; x.fillText('Us', W / 2, H - 76);
+  const g = x.createRadialGradient(W / 2, H * .42, 60, W / 2, H / 2, W * .78);
+  g.addColorStop(0, 'rgba(255,255,255,.16)'); g.addColorStop(.6, 'rgba(255,255,255,0)'); g.addColorStop(1, 'rgba(0,0,0,.3)');
+  x.fillStyle = g; x.fillRect(0, 0, W, H);
+  x.fillStyle = 'rgba(0,0,0,.07)'; for(let y = 0; y < H; y += 9) x.fillRect(0, y, W, 3);
+  x.restore(); return c;
+}
+let dl = null;
+async function showImage(canvas){
+  const url = canvas.toDataURL('image/png');
+  $('#mimg').src = url; $('#modal').hidden = false; $('#mdl').hidden = true;
+  if(window.claude && window.claude.use){ try{ dl = await window.claude.use('downloads'); }catch{ dl = null; } }
+  if(dl){ $('#mdl').hidden = false; $('#mdl').onclick = () => canvas.toBlob(b => dl.save({filename:'us-text.png', data:b}).catch(() => {}), 'image/png'); }
+}
+$('#mclose').onclick = () => { $('#modal').hidden = true; };
+
+/* ================= snake ================= */
+const SN = {cols:24, rows:14, cell:4};
+let game = null, gameTimer = null;
+function snakeStart(st){
+  const mid = SN.rows >> 1;
+  game = {body:[{x:6, y:mid}, {x:5, y:mid}, {x:4, y:mid}], dir:{x:1, y:0}, q:[], score:0, paused:false};
+  game.food = snakeFood(); st.phase = 'play';
+  clearInterval(gameTimer); gameTimer = setInterval(snakeTick, Math.max(55, 270 - st.level * 23));
+}
+function snakeFood(){ let f; do { f = {x:Math.floor(Math.random() * SN.cols), y:Math.floor(Math.random() * SN.rows)}; } while(game.body.some(p => p.x === f.x && p.y === f.y)); return f; }
+function snakeTick(){
+  if(A.screen !== 'snake' || !game){ clearInterval(gameTimer); return; }
+  if(game.paused) return;
+  const nd = game.q.shift(); if(nd) game.dir = nd;
+  const h = game.body[0], n = {x:(h.x + game.dir.x + SN.cols) % SN.cols, y:(h.y + game.dir.y + SN.rows) % SN.rows};
+  if(game.body.slice(0, -1).some(p => p.x === n.x && p.y === n.y)){ snakeOver(); return; }
+  game.body.unshift(n);
+  if(n.x === game.food.x && n.y === game.food.y){ game.score += A.st.level; game.food = snakeFood(); buzz(18); if(P.sound) tone(1900, .04, 0, .04); }
+  else game.body.pop();
+  snakeDraw();
+}
+async function snakeOver(){
+  clearInterval(gameTimer); buzz([120, 60, 200]); if(P.sound){ tone(400, .15, 0, .05); tone(260, .3, .16, .05); }
+  const st = A.st; st.phase = 'over'; st.final = game.score; render();
+  try{ const best = await S.getScore(A.me); st.best = Math.max(best, game.score); if(game.score > best) await S.setScore(A.me, game.score); st.newBest = game.score > best; }catch{}
+  if(A.st === st) render();
+}
+function snakeDraw(){
+  const cv = document.getElementById('sn'); if(!cv || !game) return;
+  const x = cv.getContext('2d'), c = SN.cell, ink = getComputedStyle($('#lcd')).getPropertyValue('--ink').trim() || '#000';
+  x.clearRect(0, 0, cv.width, cv.height); x.fillStyle = ink;
+  x.fillRect(0, 0, cv.width, 1); x.fillRect(0, cv.height - 1, cv.width, 1); x.fillRect(0, 0, 1, cv.height); x.fillRect(cv.width - 1, 0, 1, cv.height);
+  game.body.forEach(p => x.fillRect(2 + p.x * c, 2 + p.y * c, c - 1, c - 1));
+  const f = game.food, fx = 2 + f.x * c, fy = 2 + f.y * c;
+  x.fillRect(fx + 1, fy, 1, 1); x.fillRect(fx, fy + 1, 3, 1); x.fillRect(fx + 1, fy + 2, 1, 1);
+  const sc = document.getElementById('snsc'); if(sc) sc.textContent = String(game.score).padStart(4, '0');
+}
+
+/* ================= screens ================= */
+const canManage = u => u && u.username !== A.me && (A.role === 'owner' ? u.role !== 'owner' : (A.role === 'admin' && u.role === 'user'));
+function menuItems(){
+  const m = [['Messages','msgs','mail'],['Snake','snake','snake'],['Text art','text','text'],['Faal','faal','book'],['Truth or Dare','tod','q'],['Tones','tones','note'],['Settings','settings','gear']];
+  if(A.role === 'owner' || A.role === 'admin') m.push(['Admin','admin','crown']);
+  return m;
+}
+
+const screens = {
+  boot:{
+    render: () => `<div class="center"><div class="big">Us</div><div class="dim">Starting…</div></div>`
+  },
+
+  login:{
+    enter(st){ st.f = 0; st.u = ''; st.p = ''; st.msg = ''; this.ed(st); },
+    ed(st){
+      if(st.f === 0) setEd({get:() => st.u, set:v => { st.u = v.toLowerCase().replace(/[^a-z0-9_.-]/g, '').slice(0, 20); }}, 'abc');
+      else setEd({get:() => st.p, set:v => { st.p = v.slice(0, 32); }}, 'abc');
+    },
+    render: st => `<div class="title">Sign in</div>
+      <div class="lbl">Username</div>${fieldHtml(st.u, st.f === 0, 'your id')}
+      <div class="lbl">Password</div>${fieldHtml(st.p, st.f === 1, '', true)}
+      <div class="hint">${st.busy ? 'Checking…' : esc(st.msg || 'Tap the screen for keyboard · # = abc/ABC/123')}</div>
+      <div class="note">Members only · The owner can review all messages.</div>`,
+    softs: st => ['Login', st.f === 0 ? 'Next' : 'OK', 'Clear'],
+    key(k, st){
+      if(edKey(k)) return;
+      if(k === 'up' || k === 'down'){ st.f = 1 - st.f; this.ed(st); return; }
+      if(k === 'soft2'){ edBack(); return; }
+      if(k === 'ok' && st.f === 0){ st.f = 1; this.ed(st); return; }
+      if(k === 'ok' || k === 'soft1' || k === 'call') this.login(st);
+    },
+    async login(st){
+      mtCommit();
+      if(!st.u || !st.p){ st.msg = 'Enter username and password'; return; }
+      st.busy = true; render();
+      try{
+        const u = await S.getUser(st.u), h = await hashPw(st.u, st.p);
+        if(!u || u.hash !== h){ st.busy = false; st.msg = 'Wrong username or password'; buzz([60, 40, 60]); render(); return; }
+        startSession(u); go('home');
+      }catch{ st.busy = false; st.msg = 'Connection problem. Try again.'; render(); }
+    }
+  },
+
+  home:{
+    render: () => { const d = new Date();
+      return `<div class="center"><div class="big">Us</div><div class="mid" style="margin-top:.25em">${hhmm(d)}</div>
+      <div class="dim">${d.toLocaleDateString('en-GB', {weekday:'short', day:'numeric', month:'short'})}</div>
+      <div class="dim" style="margin-top:.2em">@${esc(A.me)}${hasUnread() ? ' · new message' : ''}</div></div>`; },
+    softs: () => ['Menu', '', hasUnread() ? 'Read' : 'Msgs'],
+    key(k){
+      if(k === 'soft1' || k === 'ok') go('menu', {i:A.menuIdx});
+      else if(k === 'soft2' || k === 'call') go('msgs');
+    }
+  },
+
+  menu:{
+    back:'home',
+    enter(st){ st.i = A.menuIdx || 0; },
+    render(st){ const it = menuItems(); st.i = Math.min(st.i || 0, it.length - 1); const [t, , ic] = it[st.i];
+      return `<div class="mhead">${esc(t)}<span class="idx">${st.i + 1}</span></div><div class="micon" data-act="ok">${ico(BM[ic])}</div>
+      <div class="dots">${it.map((_, j) => `<i class="${j === st.i ? 'on' : ''}"></i>`).join('')}</div>`; },
+    softs: () => ['Select', '', 'Back'],
+    key(k, st){
+      const it = menuItems(), n = it.length;
+      if(k === 'up' || k === 'left'){ st.i = (st.i - 1 + n) % n; }
+      else if(k === 'down' || k === 'right'){ st.i = (st.i + 1) % n; }
+      else if(/^[1-9]$/.test(k) && +k <= n){ st.i = +k - 1; A.menuIdx = st.i; go(it[st.i][1]); return true; }
+      else if(k === 'ok' || k === 'soft1'){ A.menuIdx = st.i; go(it[st.i][1]); return true; }
+      else if(k === 'soft2') back();
+      A.menuIdx = st.i;
+    }
+  },
+
+  msgs:{
+    back:'menu',
+    enter(st){ st.i = 0; },
+    items(){ return [{t:'✎ New message'}, ...[...A.convos].sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0)).map(c => {
+      const other = (c.members || []).find(m => m !== A.me) || A.me;
+      return {t:(isUnread(c) ? '• ' : '') + '@' + esc(other), r:c.lastTs ? hhmm(c.lastTs) : '', other};
+    })]; },
+    render(st){ const it = this.items(); st.i = Math.min(st.i, it.length - 1);
+      return `<div class="title">Messages</div>${listHtml(it, st.i)}${it.length === 1 ? '<div class="hint">No chats yet. Start one!</div>' : ''}`; },
+    softs: () => ['Open', '', 'Back'],
+    key(k, st){
+      const it = this.items();
+      if(listNav(st, k, it.length)) return;
+      if(k === 'ok' || k === 'soft1' || k === 'call'){ if(st.i === 0) go('dir'); else go('chat', {with:it[st.i].other}); return true; }
+      if(k === 'soft2') back();
+    }
+  },
+
+  dir:{
+    back:'msgs',
+    enter(st){ st.i = 0; st.q = ''; st.users = null; setEd({get:() => st.q, set:v => { st.q = v.toLowerCase().slice(0, 20); st.i = 0; }}, 'abc');
+      S.listUsers().then(later(st, us => { st.users = us.filter(u => u.username !== A.me).sort((a, b) => a.username.localeCompare(b.username)); })).catch(later(st, () => { st.users = []; st.err = true; })); },
+    list(st){ return (st.users || []).filter(u => u.username.includes(st.q)); },
+    render(st){ const l = this.list(st);
+      return `<div class="title">Send to</div><div style="display:flex;gap:.3em;align-items:center"><span class="dim">Find</span><div style="flex:1">${fieldHtml(st.q, true)}</div></div>
+      ${st.users == null ? '<div class="empty">Loading…</div>' : l.length ? listHtml(l.map(u => ({t:'@' + esc(u.username), r:u.role !== 'user' ? u.role : ''})), st.i) : `<div class="empty">${st.err ? "Couldn't load members" : 'No members found'}</div>`}`; },
+    softs: st => ['Write', '', st.q ? 'Clear' : 'Back'],
+    key(k, st){
+      const l = this.list(st);
+      if(edKey(k)) return;
+      if(listNav(st, k, l.length)) return;
+      if((k === 'ok' || k === 'soft1' || k === 'call') && l[st.i]){ go('chat', {with:l[st.i].username}); return true; }
+      if(k === 'soft2'){ if(!edBack()) back(); }
+    }
+  },
+
+  chat:{
+    back: st => st.ro ? 'allchats' : 'msgs',
+    enter(st){ st.d = ''; st.off = 0; if(!st.ro) setEd({get:() => st.d, set:v => { st.d = v.slice(0, 500); }}, 'Abc'); },
+    convo(st){ return st.ro ? st.c : A.convos.find(c => c.id === cid(A.me, st.with)); },
+    render(st){
+      const c = this.convo(st), msgs = (c && c.msgs) || [];
+      if(c && !st.ro) markSeen(c.id, c.lastTs || 0);
+      const title = st.ro ? (c.members || []).map(m => '@' + m).join(' ↔ ') : '@' + st.with;
+      const body = msgs.length ? msgs.map(m => { const mine = st.ro ? m.f === c.members[0] : m.f === A.me;
+        return `<div class="m ${mine ? 'me' : ''}" dir="auto">${st.ro ? `<b>@${esc(m.f)}</b>` : ''}${esc(m.t)}<small>${hhmm(m.ts)}</small></div>`; }).join('')
+        : `<div class="empty">${st.ro ? 'Empty chat' : 'No messages yet. Say hi!'}</div>`;
+      return `<div class="chead"><span dir="auto" style="overflow:hidden;text-overflow:ellipsis">${esc(title)}</span>${st.ro ? '<small>read only</small>' : ''}</div>
+        <div class="thread" id="thread">${body}</div>${st.ro ? '' : `<div style="margin-top:.15em">${fieldHtml(st.d, true, 'Write…')}</div>`}${st.err ? `<div class="hint">${esc(st.err)}</div>` : ''}`;
+    },
+    after(st){ const t = document.getElementById('thread'); if(t) t.scrollTop = Math.max(0, t.scrollHeight - t.clientHeight - st.off); },
+    softs: st => st.ro ? ['', '', 'Back'] : ['Send', '', st.d ? 'Clear' : 'Back'],
+    key(k, st){
+      if(!st.ro && edKey(k)) return;
+      if(k === 'up'){ st.off += 40; const t = document.getElementById('thread'); if(t) st.off = Math.min(st.off, Math.max(0, t.scrollHeight - t.clientHeight)); return; }
+      if(k === 'down'){ st.off = Math.max(0, st.off - 40); return; }
+      if(k === 'soft2'){ if(st.ro || !edBack()) back(); return; }
+      if(!st.ro && (k === 'ok' || k === 'soft1' || k === 'call')) this.send(st);
+    },
+    async send(st){
+      mtCommit(); const text = st.d.trim(); if(!text) return;
+      const id = cid(A.me, st.with), ts = Date.now(); st.d = ''; st.off = 0; st.err = '';
+      try{
+        const cur = await S.getConvo(id) || {members:[A.me, st.with].sort(), msgs:[]};
+        const msgs = [...(cur.msgs || []), {f:A.me, t:text, ts}].slice(-150);
+        const doc = {members:cur.members || [A.me, st.with].sort(), msgs, lastTs:ts, lastFrom:A.me, lastText:text.slice(0, 60)};
+        await S.setConvo(id, doc);
+        const i = A.convos.findIndex(c => c.id === id); if(i >= 0) A.convos[i] = {id, ...doc}; else A.convos.push({id, ...doc});
+        buzz(15); if(P.sound) tone(1700, .05, 0, .04);
+      }catch{ st.d = text; st.err = "Couldn't send. Check your access and try again."; }
+      if(A.st === st) render();
+    }
+  },
+
+  snake:{
+    back:'menu', ownEnd:false,
+    enter(st){ st.phase = 'menu'; st.i = 0; st.level = LS.get('us_snake_lvl', 4); },
+    leave(){ clearInterval(gameTimer); game = null; },
+    render(st){
+      if(st.phase === 'menu') return `<div class="title">Snake</div>${listHtml([{t:'Play'}, {t:'Level', r:'◂ ' + st.level + ' ▸'}, {t:'Top scores'}, {t:'How to play'}], st.i)}`;
+      if(st.phase === 'help') return `<div class="title">How to play</div><div class="scroll" style="font-size:.78em">2 / 8 / 4 / 6 or the arrows steer. OK pauses. Eat the dots, don't bite your tail. Walls wrap around. Higher level = faster and more points.</div>`;
+      if(st.phase === 'top') return `<div class="title">Top scores</div>${st.top == null ? '<div class="empty">Loading…</div>' : st.top.length ? listHtml(st.top.map((s, i) => ({t:`${i + 1}. @${esc(s.u)}`, r:s.score})), -1) : '<div class="empty">No scores yet</div>'}`;
+      if(st.phase === 'over') return `<div class="center"><div class="mid">Game over</div><div>Score ${st.final}</div><div class="dim">${st.best != null ? (st.newBest ? 'New best!' : 'Best ' + st.best) : ''}</div></div>`;
+      return `<div class="snbar"><span id="snsc">0000</span><span>${game && game.paused ? 'PAUSED' : 'L' + st.level}</span></div>
+        <div class="snw"><canvas class="sn" id="sn" width="${SN.cols * SN.cell + 3}" height="${SN.rows * SN.cell + 3}"></canvas></div>`;
+    },
+    after(st){ if(st.phase === 'play'){ const cv = document.getElementById('sn'), w = cv.parentElement;
+      const s = Math.min(w.clientWidth / cv.width, w.clientHeight / cv.height); cv.style.width = cv.width * s + 'px'; cv.style.height = cv.height * s + 'px'; snakeDraw(); } },
+    softs: st => st.phase === 'menu' ? ['Select', '', 'Back'] : st.phase === 'play' ? ['', game && game.paused ? 'Resume' : 'Pause', 'Quit'] : st.phase === 'over' ? ['Again', '', 'Back'] : ['', '', 'Back'],
+    key(k, st){
+      if(st.phase === 'play'){
+        const D = {'2':[0,-1], up:[0,-1], '8':[0,1], down:[0,1], '4':[-1,0], left:[-1,0], '6':[1,0], right:[1,0]}[k];
+        if(D && game){ const last = game.q[game.q.length - 1] || game.dir; if(last.x !== -D[0] || last.y !== -D[1]) if(game.q.length < 3) game.q.push({x:D[0], y:D[1]}); return true; }
+        if(k === 'ok' || k === '5'){ game.paused = !game.paused; return; }
+        if(k === 'soft2'){ clearInterval(gameTimer); st.phase = 'menu'; }
+        return true;
+      }
+      if(st.phase === 'menu'){
+        if(listNav(st, k, 4)) return;
+        if(st.i === 1 && (k === 'left' || k === 'right')){ st.level = Math.min(9, Math.max(1, st.level + (k === 'left' ? -1 : 1))); LS.set('us_snake_lvl', st.level); return; }
+        if(k === 'ok' || k === 'soft1'){
+          if(st.i === 0) snakeStart(st);
+          else if(st.i === 1){ st.level = st.level % 9 + 1; LS.set('us_snake_lvl', st.level); }
+          else if(st.i === 2){ st.phase = 'top'; st.top = null; S.topScores().then(later(st, t => { st.top = t; })).catch(later(st, () => { st.top = []; })); }
+          else st.phase = 'help';
+          return;
+        }
+        if(k === 'soft2') back();
+        return;
+      }
+      if(st.phase === 'over' && (k === 'ok' || k === 'soft1')){ snakeStart(st); return; }
+      if(k === 'soft2' || k === 'ok') st.phase = 'menu';
+    }
+  },
+
+  text:{
+    back:'menu',
+    enter(st){ st.t = LS.get('us_text_draft', ''); st.size = 2; setEd({get:() => st.t, set:v => { st.t = v.slice(0, 160); LS.set('us_text_draft', st.t); }}, 'Abc'); },
+    render: st => `<div class="txwrap" id="txw"><canvas id="tx"></canvas>${st.t ? '' : '<div class="ph">Tap here to type<br>(Persian works too)<br>◂ ▸ text size · OK new line</div>'}</div>`,
+    after(st){ const w = document.getElementById('txw'), cv = document.getElementById('tx'); if(!w || !cv) return;
+      cv.width = TX_LW[st.size]; cv.height = Math.max(1, Math.round(cv.width * w.clientHeight / Math.max(1, w.clientWidth)));
+      pixelText(cv, st.t, (THEMES[P.theme] || THEMES.yellow).ink); },
+    softs: st => ['Save', 'Size ' + st.size, st.t ? 'Clear' : 'Back'],
+    key(k, st){
+      if(edKey(k)) return;
+      if(k === 'left') st.size = Math.max(1, st.size - 1);
+      else if(k === 'right') st.size = Math.min(3, st.size + 1);
+      else if(k === 'ok') { mtCommit(); edInsert('\n'); }
+      else if(k === 'soft1' || k === 'call'){ mtCommit(); if(st.t.trim()) showImage(exportTextArt(st.t, st.size)); }
+      else if(k === 'soft2'){ if(!edBack()) back(); }
+    }
+  },
+
+  faal:{
+    back:'menu',
+    enter(st){ st.phase = 'intro'; },
+    render: st => st.phase === 'intro'
+      ? `<div class="center"><div class="fa" style="font-weight:700">نیت کنید</div><div class="dim">Make a wish in your heart, then press OK</div></div>`
+      : `<div class="scroll" id="fs"><div class="verse">${esc(FAAL[st.i][0])}<br>${esc(FAAL[st.i][1])}</div><div class="gist">${esc(FAAL[st.i][2])}</div></div>`,
+    softs: st => st.phase === 'intro' ? ['', 'Open', 'Back'] : ['Again', '', 'Back'],
+    key(k, st){
+      const f = document.getElementById('fs');
+      if(k === 'up' && f){ f.scrollTop -= 30; return true; }
+      if(k === 'down' && f){ f.scrollTop += 30; return true; }
+      if(k === 'ok' || k === 'soft1'){ let n; do { n = Math.floor(Math.random() * FAAL.length); } while(n === st.i && FAAL.length > 1); st.i = n; st.phase = 'show'; buzz([20, 40, 20]); return; }
+      if(k === 'soft2') back();
+    }
+  },
+
+  tod:{
+    back:'menu',
+    render: st => st.card ? `<div class="card"><b>${st.kind}</b>${esc(st.card)}</div>`
+      : `<div class="center"><div class="mid">Truth</div><div class="dim">or</div><div class="mid">Dare?</div><div class="dim" style="margin-top:.3em">◂ Truth · Dare ▸</div></div>`,
+    softs: () => ['Truth', 'Random', 'Dare'],
+    key(k, st){
+      let kind = k === 'soft1' || k === 'left' ? 'Truth' : k === 'soft2' || k === 'right' ? 'Dare' : k === 'ok' ? (Math.random() < .5 ? 'Truth' : 'Dare') : null;
+      if(!kind) return true;
+      const pool = kind === 'Truth' ? TRUTHS : DARES; let c; do { c = pool[Math.floor(Math.random() * pool.length)]; } while(c === st.card && pool.length > 1);
+      st.kind = kind; st.card = c; buzz(25);
+    }
+  },
+
+  tones:{
+    back:'menu',
+    enter(st){ st.i = 0; st.on = -1; },
+    leave(st){ stopTone(); clearTimeout(st.t); },
+    render: st => `<div class="title">Tones</div>${listHtml(TONES.map((t, i) => ({t:esc(t.name), r:i === st.on ? '♪' : ''})), st.i)}${st.on >= 0 ? '<div class="eq"><i></i><i></i><i></i><i></i></div>' : ''}`,
+    softs: st => [st.on >= 0 ? 'Stop' : 'Play', '', 'Back'],
+    key(k, st){
+      if(listNav(st, k, TONES.length)) return;
+      if(k === 'ok' || k === 'soft1'){
+        if(st.on === st.i || (k === 'soft1' && st.on >= 0)){ stopTone(); st.on = -1; return; }
+        st.on = st.i; const ms = playTone(TONES[st.i]); clearTimeout(st.t);
+        st.t = setTimeout(later(st, () => { st.on = -1; }), ms + 100); return;
+      }
+      if(k === 'soft2') back();
+    }
+  },
+
+  settings:{
+    back:'menu',
+    enter(st){ st.i = 0; },
+    items: () => [{t:'Screen', r:THEMES[P.theme].name}, {t:'Vibration', r:P.vibe ? 'On' : 'Off'}, {t:'Key tones', r:P.sound ? 'On' : 'Off'}, {t:'Change password'}, {t:'About'}, {t:'Log out'}],
+    render(st){ return `<div class="title">Settings</div>${listHtml(this.items(), st.i)}`; },
+    softs: () => ['Change', '', 'Back'],
+    key(k, st){
+      if(listNav(st, k, 6)) return;
+      const dirn = k === 'left' ? -1 : 1;
+      if(!['ok', 'soft1', 'left', 'right'].includes(k)){ if(k === 'soft2') back(); return; }
+      if(st.i === 0){ P.theme = THEME_KEYS[(THEME_KEYS.indexOf(P.theme) + dirn + THEME_KEYS.length) % THEME_KEYS.length]; applyTheme(); }
+      else if(st.i === 1){ P.vibe = !P.vibe; buzz(40); }
+      else if(st.i === 2) P.sound = !P.sound;
+      else if(k === 'left' || k === 'right') return;
+      else if(st.i === 3){ go('newpw', {target:A.me, from:'settings'}); return true; }
+      else if(st.i === 4){ go('about'); return true; }
+      else if(st.i === 5){ logout(); return true; }
+      savePrefs();
+    }
+  },
+
+  about:{
+    back:'settings',
+    render: () => `<div class="title">About Us</div><div class="scroll" style="font-size:.72em;line-height:1.35">A private classic phone for our group.<br><br>Keys: 2–9 type letters (tap again to cycle), 0 = space, # = abc/ABC/123, * = symbols. Tap the screen to use your own keyboard. Red key = back.<br><br>Storage: ${S.mode === 'shared' ? 'shared online' : 'this device only'}.<br>The owner can review all messages.</div>`,
+    softs: () => ['', '', 'Back'],
+    key(k){ if(k === 'soft2' || k === 'ok') back(); }
+  },
+
+  newpw:{
+    back: st => st.from || 'settings',
+    enter(st){ st.p = ''; st.msg = ''; setEd({get:() => st.p, set:v => { st.p = v.slice(0, 32); }}, 'abc'); },
+    render: st => `<div class="title">New password</div><div class="dim">for @${esc(st.target)}</div>${fieldHtml(st.p, true, '', true)}
+      <div class="hint">${esc(st.msg || 'At least 6 characters')}</div>`,
+    softs: st => ['Save', '', st.p ? 'Clear' : 'Back'],
+    key(k, st){
+      if(edKey(k)) return;
+      if(k === 'soft2'){ if(!edBack()) back(); return; }
+      if(k === 'ok' || k === 'soft1') this.save(st);
+    },
+    async save(st){
+      mtCommit(); if(chars(st.p).length < 6){ st.msg = 'Too short — use 6+ characters'; return; }
+      try{
+        const u = await S.getUser(st.target); if(!u){ st.msg = 'User not found'; render(); return; }
+        u.hash = await hashPw(st.target, st.p); await S.setUser(st.target, {...u});
+        if(st.target === A.me) LS.set('us_session', {u:A.me, h:u.hash});
+        st.msg = 'Saved ✓'; st.p = ''; buzz(30);
+      }catch{ st.msg = "Couldn't save. Check your access."; }
+      if(A.st === st) render();
+    }
+  },
+
+  admin:{
+    back:'menu',
+    enter(st){ st.i = 0; },
+    items: () => A.role === 'owner'
+      ? [['Create user','user'], ['Create admin','admin'], ['All members','users'], ['All chats','allchats']]
+      : [['Create user','user'], ['All members','users']],
+    render(st){ return `<div class="title">Admin · ${esc(A.role)}</div>${listHtml(this.items().map(([t]) => ({t})), st.i)}`; },
+    softs: () => ['Select', '', 'Back'],
+    key(k, st){
+      const it = this.items();
+      if(listNav(st, k, it.length)) return;
+      if(k === 'ok' || k === 'soft1'){ const a = it[st.i][1];
+        if(a === 'user' || a === 'admin') go('create', {role:a}); else go(a); return true; }
+      if(k === 'soft2') back();
+    }
+  },
+
+  create:{
+    back:'admin',
+    enter(st){ st.f = 0; st.u = ''; st.p = ''; st.msg = ''; this.ed(st); },
+    ed(st){
+      if(st.f === 0) setEd({get:() => st.u, set:v => { st.u = v.toLowerCase().replace(/[^a-z0-9_.-]/g, '').slice(0, 20); }}, 'abc');
+      else setEd({get:() => st.p, set:v => { st.p = v.slice(0, 32); }}, 'abc');
+    },
+    render: st => `<div class="title">New ${st.role}</div><div class="lbl">Username</div>${fieldHtml(st.u, st.f === 0, 'a-z 0-9 _ . -')}
+      <div class="lbl">Password</div>${fieldHtml(st.p, st.f === 1)}<div class="hint">${esc(st.msg || '↑↓ switch field · OK to save')}</div>`,
+    softs: st => ['Save', st.f === 0 ? 'Next' : 'Save', 'Clear'],
+    key(k, st){
+      if(edKey(k)) return;
+      if(k === 'up' || k === 'down'){ st.f = 1 - st.f; this.ed(st); return; }
+      if(k === 'soft2'){ if(!edBack() && !st.u && !st.p) back(); return; }
+      if(k === 'ok' && st.f === 0){ st.f = 1; this.ed(st); return; }
+      if(k === 'ok' || k === 'soft1') this.save(st);
+    },
+    async save(st){
+      mtCommit();
+      if(!validName(st.u)){ st.msg = 'Username: 3–20 of a-z 0-9 _ . -'; return; }
+      if(chars(st.p).length < 6){ st.msg = 'Password needs 6+ characters'; return; }
+      if(st.role === 'admin' && A.role !== 'owner'){ st.msg = 'Only the owner can add admins'; return; }
+      st.msg = 'Saving…'; render();
+      try{
+        if(await S.getUser(st.u)){ st.msg = '@' + st.u + ' already exists'; }
+        else {
+          await S.setUser(st.u, {username:st.u, role:st.role, hash:await hashPw(st.u, st.p), createdBy:A.me, createdAt:Date.now()});
+          st.msg = 'Created @' + st.u + ' ✓'; st.u = ''; st.p = ''; st.f = 0; this.ed(st); buzz(30);
+        }
+      }catch{ st.msg = "Couldn't save. Check your access."; }
+      if(A.st === st) render();
+    }
+  },
+
+  users:{
+    back:'admin',
+    enter(st){ st.i = 0; st.list = null; S.listUsers().then(later(st, l => { const o = {owner:0, admin:1, user:2};
+      st.list = l.sort((a, b) => (o[a.role] - o[b.role]) || a.username.localeCompare(b.username)); })).catch(later(st, () => { st.list = []; })); },
+    render: st => `<div class="title">Members${st.list ? ' · ' + st.list.length : ''}</div>${st.list == null ? '<div class="empty">Loading…</div>' : listHtml(st.list.map(u => ({t:'@' + esc(u.username), r:u.role})), st.i)}`,
+    softs: () => ['Open', '', 'Back'],
+    key(k, st){
+      if(listNav(st, k, (st.list || []).length)) return;
+      if((k === 'ok' || k === 'soft1') && st.list && st.list[st.i]){ go('udetail', {u:st.list[st.i]}); return true; }
+      if(k === 'soft2') back();
+    }
+  },
+
+  udetail:{
+    back:'users',
+    enter(st){ st.i = 0; st.confirm = false; },
+    items(st){ const m = [{t:'Send message', a:'msg'}]; if(canManage(st.u)){ m.push({t:'Reset password', a:'pw'}); m.push({t:st.confirm ? 'Press OK again to delete' : 'Delete member', a:'del'}); } return m; },
+    render(st){ const u = st.u; return `<div class="title">@${esc(u.username)}</div><div class="dim" style="text-align:center">${esc(u.role)}${u.createdBy ? ' · by @' + esc(u.createdBy) : ''}</div>${listHtml(this.items(st), st.i)}${st.msg ? `<div class="hint">${esc(st.msg)}</div>` : ''}`; },
+    softs: () => ['Select', '', 'Back'],
+    key(k, st){
+      const it = this.items(st);
+      if(listNav(st, k, it.length)){ st.confirm = false; return; }
+      if(k === 'soft2'){ back(); return true; }
+      if(k !== 'ok' && k !== 'soft1') return;
+      const a = it[st.i].a;
+      if(a === 'msg'){ if(st.u.username === A.me) return; go('chat', {with:st.u.username}); return true; }
+      if(a === 'pw'){ go('newpw', {target:st.u.username, from:'users'}); return true; }
+      if(a === 'del'){ if(!st.confirm){ st.confirm = true; return; }
+        S.delUser(st.u.username).then(later(st, () => { buzz(40); go('users'); })).catch(later(st, () => { st.msg = "Couldn't delete"; })); }
+    }
+  },
+
+  allchats:{
+    back:'admin',
+    enter(st){ st.i = 0; st.list = null; S.allConvos().then(later(st, l => { st.list = l.sort((a, b) => (b.lastTs || 0) - (a.lastTs || 0)); })).catch(later(st, () => { st.list = []; })); },
+    render: st => `<div class="title">All chats</div>${st.list == null ? '<div class="empty">Loading…</div>' : st.list.length ? listHtml(st.list.map(c => ({t:(c.members || []).join(' ↔ '), r:c.lastTs ? hhmm(c.lastTs) : ''})), st.i) : '<div class="empty">No chats yet</div>'}`,
+    softs: () => ['Read', '', 'Back'],
+    key(k, st){
+      if(listNav(st, k, (st.list || []).length)) return;
+      if((k === 'ok' || k === 'soft1') && st.list && st.list[st.i]){ go('chat', {ro:true, c:st.list[st.i]}); return true; }
+      if(k === 'soft2') back();
+    }
+  }
+};
+
+/* ================= input wiring ================= */
+function press(k){
+  keyFeedback();
+  const s = screens[A.screen]; if(!s || A.screen === 'boot') return;
+  if(k === 'end'){ if(!['home', 'login'].includes(A.screen)) back(); else if(A.screen === 'home' && A.st) render(); return; }
+  const skip = s.key ? s.key(k, A.st) : false;
+  if(!skip && screens[A.screen] === s) render();
+}
+const PAD = [['1','.,?!'],['2','abc'],['3','def'],['4','ghi'],['5','jkl'],['6','mno'],['7','pqrs'],['8','tuv'],['9','wxyz'],['*','+'],['0','␣'],['#','⇧']];
+$('#pad').innerHTML = PAD.map(([n, l]) => `<button class="key" data-k="${n}" aria-label="${n} ${l}"><b>${n}</b><small>${l}</small></button>`).join('');
+
+let holdT = null, repT = null;
+function clearHold(){ clearTimeout(holdT); clearInterval(repT); holdT = repT = null; }
+function holdStart(k){
+  clearHold();
+  if(k === 'soft2') holdT = setTimeout(() => { if(A.ed && A.ed.get()){ mtCommit(); A.ed.set(''); buzz(40); render(); } }, 650);
+  if(k === 'up' || k === 'down') holdT = setTimeout(() => { repT = setInterval(() => press(k), 110); }, 420);
+}
+const dpad = $('#dpad');
+document.querySelectorAll('.phone [data-k]').forEach(b => {
+  if(b.closest('.softs')) return;
+  b.addEventListener('pointerdown', e => {
+    e.preventDefault(); const k = b.dataset.k;
+    b.classList.add('down'); if(b.classList.contains('dp')) dpad.classList.add('t-' + k);
+    press(k); holdStart(k);
+  });
+  const up = () => { b.classList.remove('down'); dpad.classList.remove('t-up', 't-down', 't-left', 't-right'); clearHold(); };
+  ['pointerup', 'pointerleave', 'pointercancel'].forEach(t => b.addEventListener(t, up));
+  b.addEventListener('keydown', e => { if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); press(b.dataset.k); } });
+  b.addEventListener('contextmenu', e => e.preventDefault());
+});
+$('#lcd').addEventListener('click', e => {
+  const sk = e.target.closest('.softs [data-k]'); if(sk){ press(sk.dataset.k); return; }
+  const r = e.target.closest('[data-i]'); if(r && A.st){ A.st.i = +r.dataset.i; press('ok'); return; }
+  const a = e.target.closest('[data-act]'); if(a){ press(a.dataset.act); return; }
+  if(A.ed) openKb();
+});
+document.addEventListener('keydown', e => {
+  if(document.activeElement === kb || !$('#modal').hidden) return;
+  const map = {ArrowUp:'up', ArrowDown:'down', ArrowLeft:'left', ArrowRight:'right', Enter:'ok', Escape:'end'};
+  if(map[e.key]){ e.preventDefault(); press(map[e.key]); return; }
+  if(e.key === 'Backspace'){ e.preventDefault(); press('soft2'); return; }
+  if(e.key.length === 1 && !e.ctrlKey && !e.metaKey){
+    if(A.ed){ e.preventDefault(); keyFeedback(); mtCommit(); edInsert(e.key); render(); }
+    else if(/[0-9*#]/.test(e.key)) press(e.key);
+  }
+});
+setInterval(() => { $('#clk').textContent = hhmm(Date.now()); if(A.screen === 'home') render(); }, 15000);
+
+/* ================= boot ================= */
+(async function boot(){
+  go('boot');
+  if(document.fonts){ Promise.all([document.fonts.load('700 20px "Pixelify Sans"'), document.fonts.load('700 20px Vazirmatn')]).then(() => { if(A.screen === 'text') render(); }).catch(() => {}); }
+  await S.init();
+  const sess = LS.get('us_session', null);
+  if(sess && sess.u){
+    try{ const u = await S.getUser(sess.u); if(u && u.hash === sess.h){ startSession(u); go('home'); return; } }catch{}
+    LS.del('us_session');
+  }
+  go('login');
+})();
+</script>
+</body>
+</html>
